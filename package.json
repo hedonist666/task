@@ -1,0 +1,22 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "host.js ",
+  "scripts": {
+    "test": "node host.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hedonist666/task.git"
+  },
+  "author": "Всеволод Дроздов",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hedonist666/task/issues"
+  },
+  "homepage": "https://github.com/hedonist666/task#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
