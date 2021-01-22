@@ -2,11 +2,12 @@
 #include "utils.h"
 
 
-int SIZE;
+extern int SIZE;
 
 
 double mae(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int *ind, int size);
 
+/*
 int main(int argc, char* argv[]) {
     
     int *ind;
@@ -21,6 +22,7 @@ int main(int argc, char* argv[]) {
     delete ind, table1, table2;
     return 0;
 }
+*/
 
 
 double mae(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int *ind, int size) {
