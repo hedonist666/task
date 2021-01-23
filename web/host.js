@@ -3,39 +3,27 @@
 const express = require('express')
 const fs      = require('fs')
 const http    = require('http')
+const multer  = require('multer')
 const metrics = require('../build/Release/metrics')
+
+let upload = multer({ dest: './csv/' })
 
 const app = express()
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
-    console.log('got /')
+router.get('/', (req, res) => {
+    console.log('TODO')
+})
+
+router.post('/upload', upload.single('payload'), (req, res) => {
+    res.body = {
+        mae: metrics.mae('answers/answers_shifted1.1csv', req.file),
+        rmape: metrics.rmape('answers/answers_shifted1.1csv', req.file)
+    }
 })
 
 app.use('/', router)
 
-const port   = process.env.PORT || 8888
-const server = http.createServer(app)
-server.on('error', onError)
-server.listen(port)
-console.log('[*] listening on port ' + port)
+//console.log(metrics.mae('csv/answers_shifted1.1.csv', 'csv/download_468.1933.csv'))
 
-
-function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-    let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
-}
+module.exports = app
