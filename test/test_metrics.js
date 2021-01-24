@@ -12,13 +12,13 @@ suite('metrics', function() {
     })
 
     suite('mae', function() {
-        test('should not be zero with diffrent contets', function() {
+        test('Value should not be zero with diffrent contents', function() {
             let res = metrics.mae(buff1, buff2, path.join(__dirname, 'materials/index.txt'));
             assert.notEqual(res, 0)
         })
     })
     suite('rmape', function() {
-        test('should not be zero with diffrent contets', function() {
+        test('Value should not be zero with diffrent contents', function() {
             let res = metrics.rmape(buff1, buff2, path.join(__dirname, 'materials/index.txt'));
             assert.notEqual(res, 0)
         })
