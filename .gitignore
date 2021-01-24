@@ -6,3 +6,7 @@ csv/*
 mae_log.txt
 rmae_log.txt
 log.txt
+test/rmape*
+test/mae*
+test/scr.sh
+test/utils*

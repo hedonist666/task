@@ -1,6 +1,8 @@
 #define NAPI_CPP_EXCEPTIONS
 #include <napi.h>
 #include <sstream>
+#include <functional>
+#include <exception>
 #include "utils.h"
 
 using namespace Napi;
@@ -18,7 +20,18 @@ struct CSVBuff : public Napi::ObjectWrap<CSVBuff> {
             Napi::TypeError::New(env, "Wrong number of arguments") .ThrowAsJavaScriptException();
             return;
         }
-        read_data_csv(info[0].ToString(), &data);
+        try {
+            read_data_csv(info[0].ToString(), &data);
+        }
+        catch (const char* e) {
+            Napi::Error::New(env, string("Error reading csv file: ") + string(e)).ThrowAsJavaScriptException();
+            return;
+        }
+    }
+
+    Napi::Value size(const Napi::CallbackInfo& info) {
+        Napi::Env env = info.Env();
+        return Napi::Number::New(env, data.size());
     }
 
     Napi::Value get(const Napi::CallbackInfo& info) {
@@ -46,151 +59,95 @@ struct CSVBuff : public Napi::ObjectWrap<CSVBuff> {
     static Napi::Function GetClass(Napi::Env env) {
         return DefineClass(env, "CSVBuff", {
             CSVBuff::InstanceMethod("get", &CSVBuff::get),
-            CSVBuff::InstanceMethod("toString", &CSVBuff::toString)
+            CSVBuff::InstanceMethod("toString", &CSVBuff::toString),
+            CSVBuff::InstanceMethod("size", &CSVBuff::size)
         });
     }
 };
 
-
-Napi::Value MaeWrapper(const Napi::CallbackInfo& info) {
-    static ofstream ofn {"mae_log.txt"};
-    Napi::Env env = info.Env();
-    if (info.Length() < 3) {
-        Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-    int* ind;
-    unordered_map<int, double>* table1;
-    unordered_map<int, double>* table2;
-
-    if (info[0].IsString()) {
-        table1 = new unordered_map<int, double>;
-        read_data_csv(info[0].ToString(), table1);
-    }
-    else if (info[0].IsObject()) {
-        table1 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[0].As<Napi::Object>())->data;
-        for (auto it = table1->begin(); it != table1->end(); ++it) {
-            ofn << it->first << ": " << it->second << endl;
+template<typename F> 
+Napi::Function MetricWrapper(Napi::Env env, F fun) {
+    return Napi::Function::New(env, [env, fun](const Napi::CallbackInfo& info) {
+        Napi::Env env = info.Env();
+        if (info.Length() < 3) {
+            Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
+            return env.Null();
         }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
-        return env.Null();
-    }
+        int* ind;
+        unordered_map<int, double>* table1;
+        unordered_map<int, double>* table2;
 
-    if (info[1].IsString()) {
-        ofn << "arg 2 created from source" << endl;;
-        table2 = new unordered_map<int, double>;
-        read_data_csv(info[1].ToString(), table2);
-    }
-    else if (info[1].IsObject()) {
-        table2 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[1].As<Napi::Object>())->data;
-        ofn << "got data from buffer" << endl;
-        for (auto it = table2->begin(); it != table2->end(); ++it) {
-            ofn << it->first << ": " << it->second << endl;
-        }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-        
-    if (info[2].IsString()) {
-        ind = read_indexes(info[2].ToString());
-    }
-    else if (info[2].IsArray()) {
-        Napi::Array _ind = info[2].As<Napi::Array>();
-        ind = new int[_ind.Length()];
-        for (size_t i = 0; i < _ind.Length(); ++i) {
-            if (!_ind.Get(i).IsNumber()) {
-                Napi::TypeError::New(env, "Wrong type: Specify array of numbers as indexes").ThrowAsJavaScriptException();
+        if (info[0].IsString()) {
+            table1 = new unordered_map<int, double>;
+            try {
+                read_data_csv(info[0].ToString(), table1);
+            }
+            catch (const char* e) {
+                Napi::Error::New(env, string("Error reading csv file: ") + string(e)).ThrowAsJavaScriptException();
                 return env.Null();
             }
-            ind[i] = _ind.Get(i).ToNumber().Uint32Value();
         }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or array of Numbers").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-    double res = mae(table1, table2, ind, SIZE);
-    if (info[0].IsString()) delete table1;
-    if (info[1].IsString()) delete table2;
-    delete ind;
-    return Napi::Number::New(env, res);
-}
-
-Napi::Value RmapeWrapper(const Napi::CallbackInfo& info) {
-    static ofstream ofn{"rmae_log.txt"};
-    Napi::Env env = info.Env();
-    if (info.Length() < 3) {
-        Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-    int* ind;
-    unordered_map<int, double>* table1;
-    unordered_map<int, double>* table2;
-
-    if (info[0].IsString()) {
-        table1 = new unordered_map<int, double>;
-        read_data_csv(info[0].ToString(), table1);
-    }
-    else if (info[0].IsObject()) {
-        table1 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[0].As<Napi::Object>())->data;
-        for (auto it = table1->begin(); it != table1->end(); ++it) {
-            ofn << it->first << ": " << it->second << endl;
+        else if (info[0].IsObject()) {
+            table1 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[0].As<Napi::Object>())->data;
         }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-
-    if (info[1].IsString()) {
-        ofn << "arg 2 created from source" << endl;;
-        table2 = new unordered_map<int, double>;
-        read_data_csv(info[1].ToString(), table2);
-    }
-    else if (info[1].IsObject()) {
-        table2 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[1].As<Napi::Object>())->data;
-        ofn << "got data from buffer" << endl;
-        for (auto it = table2->begin(); it != table2->end(); ++it) {
-            ofn << it->first << ": " << it->second << endl;
+        else {
+            Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
+            return env.Null();
         }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-        
-    if (info[2].IsString()) {
-        ind = read_indexes(info[2].ToString());
-    }
-    else if (info[2].IsArray()) {
-        Napi::Array _ind = info[2].As<Napi::Array>();
-        ind = new int[_ind.Length()];
-        for (size_t i = 0; i < _ind.Length(); ++i) {
-            if (!_ind.Get(i).IsNumber()) {
-                Napi::TypeError::New(env, "Wrong type: Specify array of numbers as indexes").ThrowAsJavaScriptException();
+
+        if (info[1].IsString()) {
+            table2 = new unordered_map<int, double>;
+            try {
+                read_data_csv(info[1].ToString(), table2);
+            }
+            catch (const char* e) {
+                Napi::Error::New(env, string("Error reading csv file: ") + string(e)).ThrowAsJavaScriptException();
                 return env.Null();
             }
-            ind[i] = _ind.Get(i).ToNumber().Uint32Value();
         }
-    }
-    else {
-        Napi::TypeError::New(env, "Expected file name or array of Numbers").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-    double res = mae(table1, table2, ind, SIZE);
-    if (info[0].IsString()) delete table1;
-    if (info[1].IsString()) delete table2;
-    delete ind;
-    return Napi::Number::New(env, res);
+        else if (info[1].IsObject()) {
+            table2 = &Napi::ObjectWrap<CSVBuff>::Unwrap(info[1].As<Napi::Object>())->data;
+        }
+        else {
+            Napi::TypeError::New(env, "Expected file name or CSVBuff object").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+            
+        if (info[2].IsString()) {
+            try {
+                ind = read_indexes(info[2].ToString());
+            }
+            catch (const char* e) {
+                Napi::Error::New(env, string("Error reading index file: ") + string(e)).ThrowAsJavaScriptException();
+                return env.Null();
+            }
+        }
+        else if (info[2].IsArray()) {
+            Napi::Array _ind = info[2].As<Napi::Array>();
+            ind = new int[_ind.Length()];
+            for (size_t i = 0; i < _ind.Length(); ++i) {
+                if (!_ind.Get(i).IsNumber()) {
+                    Napi::TypeError::New(env, "Wrong type: Specify array of numbers as indexes").ThrowAsJavaScriptException();
+                    return env.Null();
+                }
+                ind[i] = _ind.Get(i).ToNumber().Uint32Value();
+            }
+        }
+        else {
+            Napi::TypeError::New(env, "Expected file name or array of Numbers").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+        double res = fun(table1, table2, ind, SIZE);
+        if (info[0].IsString()) delete table1;
+        if (info[1].IsString()) delete table2;
+        delete ind;
+        return (Napi::Value)Napi::Number::New(env, res);
+    });
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
-    exports.Set(Napi::String::New(env, "mae"), Napi::Function::New(env, MaeWrapper));
-    exports.Set(Napi::String::New(env, "rmape"), Napi::Function::New(env, RmapeWrapper));
+    exports.Set(Napi::String::New(env, "rmape"), MetricWrapper(env, rmape));
+    exports.Set(Napi::String::New(env, "mae"), MetricWrapper(env, mae));
     exports.Set(Napi::String::New(env, "CSVBuff"), CSVBuff::GetClass(env));
     return exports;
 }
