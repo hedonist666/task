@@ -5,15 +5,20 @@ const fs      = require('fs')
 const http    = require('http')
 const multer  = require('multer')
 const metrics = require('../build/Release/metrics')
+const morgan  = require('morgan')
 
 let upload = multer({ dest: './csv/' })
 
 const app = express()
+
+app.use(morgan('combined'))
+
 const router = express.Router()
 
 router.get('/', (req, res) => {
     console.log('TODO')
 })
+
 
 router.post('/upload', upload.single('payload'), (req, res) => {
     res.body = {
@@ -23,7 +28,5 @@ router.post('/upload', upload.single('payload'), (req, res) => {
 })
 
 app.use('/', router)
-
-//console.log(metrics.mae('csv/answers_shifted1.1.csv', 'csv/download_468.1933.csv'))
 
 module.exports = app

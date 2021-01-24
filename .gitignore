@@ -3,3 +3,6 @@ build
 tmp*.cpp
 answers/*
 csv/*
+mae_log.txt
+rmae_log.txt
+log.txt

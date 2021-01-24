@@ -5,7 +5,7 @@
 extern int SIZE;
 
 
-double rmape(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int *ind, int size);
+double rmape(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int * ind, int size);
 
 /*
 int main(int argc, char* argv[]) {
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 */
 
 
-double rmape(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int *ind, int size) {
+double rmape(unordered_map<int, double> *y_true, unordered_map<int, double> *y_pred, int * ind, int size) {
     double tmp, sum = 0;
     int idx;
     for(int i = 0; i < size; i++) {

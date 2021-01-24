@@ -6,4 +6,4 @@ if ! command -v node-gyp &> /dev/null; then
 fi
 
 [ -f Build/Makefile ] || node-gyp configure
-node-gyp build && node --napi-modules ./bin/www
+node-gyp build && npm test && echo [*] ALL TESTS PASSED && npm start 
