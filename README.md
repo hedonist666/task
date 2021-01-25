@@ -1,6 +1,6 @@
-структура проекта:
-cpp/metrics.cpp - оберкта функций из исходников cpp/mae.cpp и cpp/rmape.cpp
-bin/www - сервер
-web/host.js - express приложение
-test/test_*.js - тесты
-scr.sh - bash скрипт, комплиирующий С++ модуль, проводящий тесты и запускающий приложение
+структура проекта:<br/>
+cpp/metrics.cpp - оберкта функций из исходников cpp/mae.cpp и cpp/rmape.cpp<br/>
+bin/www - сервер<br/>
+web/host.js - express приложение<br/>
+test/test_*.js - тесты<br/>
+scr.sh - bash скрипт, комплиирующий С++ модуль, проводящий тесты и запускающий приложение<br/>
