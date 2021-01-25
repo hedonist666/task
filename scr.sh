@@ -5,5 +5,8 @@ if ! command -v node-gyp &> /dev/null; then
     sudo npm i node-gyp -g
 fi
 
+[ -d node_modules ] || npm install
+[ -d web/client/node_modules ] || npm install 
+
 [ -f Build/Makefile ] || node-gyp configure
 node-gyp build && npm test && echo [*] ALL TESTS PASSED && npm start 
