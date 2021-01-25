@@ -117,27 +117,42 @@ Napi::Function MetricWrapper(Napi::Env env, F fun) {
             try {
                 ind = read_indexes(info[2].ToString());
             }
-            catch (const char* e) {
-                Napi::Error::New(env, string("Error reading index file: ") + string(e)).ThrowAsJavaScriptException();
+            catch (const ifstream::failure& e) {
+                Napi::Error::New(env, string("Error reading index file: ") + e.what()).ThrowAsJavaScriptException();
                 return env.Null();
             }
         }
         else if (info[2].IsArray()) {
             Napi::Array _ind = info[2].As<Napi::Array>();
-            ind = new int[_ind.Length()];
-            for (size_t i = 0; i < _ind.Length(); ++i) {
+            if (!_ind.Get(ssize_t{0}).IsNumber()) {
+                Napi::TypeError::New(env, "Wrong type: Specify array of numbers as indexes").ThrowAsJavaScriptException();
+                return env.Null();
+            }
+            SIZE = _ind.Get(ssize_t{0}).ToNumber().Uint32Value();
+            ind = new int[_ind.Length() - 1];
+            for (size_t i = 1; i < _ind.Length(); ++i) {
                 if (!_ind.Get(i).IsNumber()) {
                     Napi::TypeError::New(env, "Wrong type: Specify array of numbers as indexes").ThrowAsJavaScriptException();
                     return env.Null();
                 }
-                ind[i] = _ind.Get(i).ToNumber().Uint32Value();
+                ind[i - 1] = _ind.Get(i).ToNumber().Uint32Value();
             }
         }
         else {
             Napi::TypeError::New(env, "Expected file name or array of Numbers").ThrowAsJavaScriptException();
             return env.Null();
         }
-        double res = fun(table1, table2, ind, SIZE);
+        double res;
+        try {
+            res = fun(table1, table2, ind, SIZE);
+        }
+        catch (const char* e) {
+            if (info[0].IsString()) delete table1;
+            if (info[1].IsString()) delete table2;
+            delete ind;
+            Napi::Error::New(env, "Error calculating: " + string(e)).ThrowAsJavaScriptException();
+            return env.Null();
+        } 
         if (info[0].IsString()) delete table1;
         if (info[1].IsString()) delete table2;
         delete ind;

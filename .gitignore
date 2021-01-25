@@ -10,3 +10,4 @@ test/rmape*
 test/mae*
 test/scr.sh
 test/utils*
+web/csv/*

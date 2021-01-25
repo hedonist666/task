@@ -1,26 +1,41 @@
-#!/usr/bin/env node
-
-const assert  = require('assert')
 const metrics = require('../build/Release/metrics')
 const path    = require('path')
+const chai    = require('chai')
 
-suite('metrics', function() {
+const should  = chai.should()
+
+describe('metrics', function() {
     let buff1, buff2
-    setup(function() {
-        buff1 = new metrics.CSVBuff(path.join(__dirname, '../web/answers/answers_shifted1.1.csv'));
+    before(function() {
+        buff1 = new metrics.CSVBuff(path.join(__dirname, 'materials/answers_shifted1.1.csv'));
         buff2 = new metrics.CSVBuff(path.join(__dirname, 'materials/download_468.1933.csv'));
     })
 
-    suite('mae', function() {
-        test('Value should not be zero with diffrent contents', function() {
-            let res = metrics.mae(buff1, buff2, path.join(__dirname, 'materials/index.txt'));
-            assert.notEqual(res, 0)
-        })
+    it('Mae value should not be zero with diffrent contents', function() {
+        metrics.mae(buff1, buff2, path.join(__dirname, 'materials/index.txt')).should.not.equal(0)
     })
-    suite('rmape', function() {
-        test('Value should not be zero with diffrent contents', function() {
-            let res = metrics.rmape(buff1, buff2, path.join(__dirname, 'materials/index.txt'));
-            assert.notEqual(res, 0)
-        })
+
+    it('Rmape value should not be zero with diffrent contents', function() {
+        metrics.rmape(buff1, buff2, path.join(__dirname, 'materials/index.txt')).should.not.equal(0)
+    })
+
+    it('Mae should throw with bad files', function() {
+        (function() {
+            metrics.mae('bad.csv', buff2, path.join(__dirname, 'materials/index.txt'))
+        }.should.throw());
+
+        (function() {
+            metrics.mae(buff1, buff2, path.join(__dirname, 'materials/bad.txt'))
+        }.should.throw());
+    })
+
+    it('Rmape should throw with bad files', function() {
+        (function() {
+            metrics.rmape('bad.csv', buff2, path.join(__dirname, 'materials/index.txt'))
+        }.should.throw());
+
+        (function() {
+            metrics.rmape(buff1, buff2, path.join(__dirname, 'materials/bad.txt'))
+        }.should.throw());
     })
 })
