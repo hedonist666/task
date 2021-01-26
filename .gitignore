@@ -12,3 +12,4 @@ test/scr.sh
 test/utils*
 web/csv/*
 package-lock.json
+zips
