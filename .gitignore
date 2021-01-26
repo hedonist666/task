@@ -11,4 +11,4 @@ test/mae*
 test/scr.sh
 test/utils*
 web/csv/*
-web/client/*
+package-lock.json

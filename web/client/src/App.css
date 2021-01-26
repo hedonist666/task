@@ -1,0 +1,53 @@
+.rect-btn {
+    background: linear-gradient(90deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px solid #d3d2d2;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+}
+
+.header-link {
+  text-decoration: none;
+  font-family: Stapel;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #231F20;
+  padding-left: 24px;
+}
+
+.logo-img {
+    width: 130px;
+    height: 50px;
+    margin-right: auto;
+    padding-left: 40px;
+}
+
+.hexagon1 {
+    position: absolute;
+    height: 432px;
+    width: 432px;
+    left: 220px;
+    top: -120px;
+}
+
+.hexagon2 { 
+    position: absolute;
+    height: 432px;
+    width: 500px;
+    left: 724px;
+    top: -36px;
+}
