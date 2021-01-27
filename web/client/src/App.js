@@ -1,7 +1,15 @@
 import React from 'react';
-import rosneft_logo from './materials/rosneft_logo.svg'
-import hexagon2 from './materials/hexagon-gradient-4.svg'
-import hexagon1 from './materials/hexagon-gradient-2.1.svg'
+import rosneft_logo from './materials/rosneft_logo.svg';
+import hexagon2 from './materials/hexagon-gradient-4.svg';
+import hexagon1 from './materials/hexagon-gradient-2.1.svg';
+import year_image from './materials/Vector.svg';
+import big_hexagon from './materials/Hexagon-Vector.svg';
+import little_hexagon from './materials/Little-hexagon.svg';
+import three_lines from './materials/Three-lines.svg';
+import marathon_back from './materials/Marathon-back.svg';
+import vk_logo from './materials/Vk-logo.svg';
+import facebook_logo from './materials/Facebook-logo.svg';
+import instagram_logo from './materials/Instagram-logo.svg';
 import './App.css';
 
 class Header extends React.Component {
@@ -26,7 +34,7 @@ class Header extends React.Component {
 function News(props) {
     return (
         <div class="news-block">
-            <div class="new-header">
+            <div class="news-header">
                 {props.header}
             </div>
             <div class="news-content">
@@ -43,14 +51,21 @@ class Marathon extends React.Component {
     render() {
         return (
             <div className="marathon">
-                <div className="main-txt">
-                    Марафон <br /> ИТ-соревнований
+                <div className="marathon-logo">
+                    <div className="main-txt">
+                        Марафон <br /> ИТ-соревнований
+                    </div>
+                    <img className="year-img" src={year_image} alt="2020" />
+                    <img className="big-hexagon" src={big_hexagon} alt="hexagon" />
+                    <img className="three-lines" src={three_lines} alt="3 lines" />
+                    <img className="little-hexagon" src={little_hexagon} alt="hexagon" />
+                    <div className="sub-txt">
+                        Роснефть приглашает разработчиков и аналитиков принять участие в одном из трёх соревнований
+                    </div>
                 </div>
-                <div className="sub-txt">
-                    Роснефть приглашает разработчиков и аналитиков принять участие в одном из трёх соревнований
-                </div>
-                <div class="news">
-                    <div class="news-header">
+                <img className="marathon-back" src={marathon_back} alt="hexagon" />
+                <div className="news">
+                    <div className="news-main-header">
                         #ПульсМарафон
                     </div>
                     <News 
@@ -63,7 +78,16 @@ class Marathon extends React.Component {
                         content="Пока магма остается в камере, углефикация сдвигает меловой мусковит. Вулканическое стекло, скажем, за 100 тысяч лет, сменяет глетчерный приток, причем, вероятно..."
                         link="#"
                     />
-                    <a class="to-new" href="#">Ко всем новостям</a>
+                    <a className="to-all-news" href="#">Ко всем новостям</a>
+                    <div className="contacts">
+                        <p>По всем вопросам: </p>
+                        <a className="mail-link" href="#">rd.knpk@bnipi.rosneft.ru</a>
+                    </div>
+                    <div className="social-media">
+                        <a className="social-link" href="#"><img className="social-logo" src={vk_logo} alt="vk" /></a>
+                        <a className="social-link" href="#"><img className="social-logo" src={facebook_logo} alt="facebook" /></a>
+                        <a className="social-link" href="#"><img className="social-logo" src={instagram_logo} alt="instagram" /></a>
+                    </div>
                 </div>
                 
             </div>

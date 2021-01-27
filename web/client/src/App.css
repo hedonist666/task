@@ -53,6 +53,7 @@
 }
 
 .marathon {
+    position: relative;
     height: 100%;
     width: 360px;
     display: flex;
@@ -62,20 +63,58 @@
     align-items: center;
 }
 
-.main-txt {
+.marathon-logo {
     width: 280px;
+    margin-bottom: 80px;
+    margin-top: 70px;
+    position: relative;
+}
+
+.main-txt {
+    position: relative;
     height: 88px;
+    z-index: 2;
+    padding-top: 28px;
     font-family: Stapel;
     font-style: normal;
     font-weight: bold;
     font-size: 25px;
     line-height: 32px;
-    padding-top: 70px;
     letter-spacing: 0.02em;
     color: #231F20;
 }
 
+.year-img {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 100px;
+    padding-left: 70px;
+    z-index: 2;
+}
+
+.big-hexagon {
+    position: absolute;
+    top: 0px;
+    left: 24px;
+    z-index: 1;
+}
+
+.little-hexagon {
+    position: absolute;
+    top: 250px;
+    left: 176px;
+    z-index: 1;
+}
+
+.three-lines {
+    position: absolute;
+    left: 0px;
+    top: 200px;
+}
+
 .sub-txt {
+    position: relative;
+    z-index: 2;
     width: 280px;
     height: 120px;
     padding-bottom: 20px;
@@ -85,11 +124,18 @@
     font-family: Stapel;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 24px;
     letter-spacing: 0.02em;
     color: #231F20;
     background: radial-gradient(100% 100% at 0% 100%, #FFF4C2 0%, rgba(255, 231, 167, 0.2) 60%, rgba(255, 255, 255, 0) 100%);
+}
+
+.marathon-back {
+    position: absolute;
+    top: 260px;
+    right: 3px;
+    z-index: 1;
 }
 
 .news {
@@ -97,10 +143,10 @@
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    background: linear-gradient(90deg, rgba(255, 190, 91, 0.4) 0%, rgba(255, 210, 0, 0.4) 50%, rgba(255, 221, 0, 0) 100%);
+    z-index: 2;
 }
 
-.news-header {
+.news-main-header {
     height: 28px;
     width: 256px;
     /* Narrow Bold, 24, 28, 0.02 */
@@ -117,19 +163,25 @@
     color: #231F20;
 }
 
+.news-block {
+    width: 280px;
+    height: 300px;
+    margin: 16px;
+    background: linear-gradient(90deg, rgba(255, 190, 91, 0.4) 0%, rgba(255, 210, 0, 0.4) 50%, rgba(255, 221, 0, 0) 100%);
+}
 
-.new-header {
+.news-header {
     height: 48px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
+    width: 256px;
+    padding-top: 24px;
+    padding-left: 24px;
 
     /* Narrow Bold, 20, 24, 0.02 */
     font-family: Stapel;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 18px;
 
     /* or 120% */
     letter-spacing: 0.02em;
@@ -138,18 +190,18 @@
     color: #231F20;
 }
 
-.new-content {
+.news-content {
     width: 256px;
     height: 144px;
-    left: 0px;
-    top: 64px;
+    padding-top: 24px;
+    padding-left: 24px;
 
     /* Narrow, 20, 24, 0.02 */
     font-family: Stapel;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 18px;
 
     /* or 120% */
     letter-spacing: 0.02em;
@@ -159,11 +211,14 @@
 }
 
 .read-further {
-    text-decoration: none;
+    padding-top: 16px;
+    padding-left: 24px;
+    padding-bottom: 26px;
+    text-decoration: underline;
     font-family: Stapel;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 24px;
 
     /* identical to box height, or 120% */
@@ -173,4 +228,72 @@
 
     /* Dark / 50% */
     color: rgba(35, 31, 32, 0.5);
+}
+
+.to-all-news {
+    width: 280px;
+    border: 2px solid rgba(35, 31, 32, 0.2);
+    box-sizing: border-box;
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 24px;
+
+    /* identical to box height, or 120% */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    /* Dark / 100% */
+    color: #231F20;
+}
+
+.contacts {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.contacts p {
+    margin: 0;
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+
+    /* identical to box height, or 120% */
+    text-align: center;
+    letter-spacing: 0.02em;
+
+    /* Dark / 100% */
+    color: #231F20;
+} 
+
+.mail-link {
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+
+    /* identical to box height, or 120% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+
+    /* Dark / 100% */
+    color: #231F20;
+}
+
+.social-media {
+    width: 180px;
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+.social-link {
+    margin-right: 20px;
 }
