@@ -56,7 +56,7 @@
     position: relative;
     height: 100%;
     width: 360px;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     border-right: 1px solid #d3d2d2;
     justify-content: top;
@@ -297,3 +297,124 @@
 .social-link {
     margin-right: 20px;
 }
+
+.annonces-list {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.annonce-block {
+    position: relative;
+    background: linear-gradient(90deg, #FFEA00 0%, #FFD200 50%, #FFCC33 100%);
+    margin-bottom: 16px;
+    width: calc(99vw - 360px - 80px);
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: row;
+}
+
+.challenge-logo {
+    margin-top: 32px;
+    margin-left: 40px;
+    margin-right: 37px;
+    width: 70px;
+    height: 60px;
+    position: relative;
+}
+
+.challenge-description {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 26px;
+    width: 272px;
+
+}
+
+.challenge-tittle {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    color: #231F20;
+}
+
+.challenge-subtittle {
+    margin-top: 0px;
+    margin-bottom: 24px;
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    color: #231F20;
+}
+
+.challenge-info {
+    display: flex;
+    justify-content: top;
+    flex-direction: row;
+    margin-bottom: 85px;
+}
+
+
+.challenge-info-images {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.info-item {
+    display: flex;
+    align-items: center;  
+    justify-content: top;
+    margin-top: 0px;
+    margin-right: 14px;
+    margin-bottom: 18px;
+    width: 20px;
+    height: 22px;
+}
+
+.challenge-info-captures {
+    display: flex;
+    flex-direction: column;
+}
+
+.capture-item {
+    height: 22px;
+    margin-bottom: 18px;
+}
+
+.challenge-background {
+    position: absolute;
+    right: 0px;    
+    height: 100%;
+    width: 360px;
+}
+
+.details {
+    display: flex;
+    width: 240px;
+    height: 48px;
+    margin-bottom: 32px;
+    justify-content: center;
+    align-items: center;
+    font-family: Stapel;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    color: #231F20;
+    text-decoration: none;
+    border: 2px solid rgba(35, 31, 32, 0.2);
+    padding: 1px;
+}
+

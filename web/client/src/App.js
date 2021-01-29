@@ -1,15 +1,22 @@
 import React from 'react';
-import rosneft_logo from './materials/rosneft_logo.svg';
-import hexagon2 from './materials/hexagon-gradient-4.svg';
-import hexagon1 from './materials/hexagon-gradient-2.1.svg';
-import year_image from './materials/Vector.svg';
-import big_hexagon from './materials/Hexagon-Vector.svg';
-import little_hexagon from './materials/Little-hexagon.svg';
-import three_lines from './materials/Three-lines.svg';
-import marathon_back from './materials/Marathon-back.svg';
-import vk_logo from './materials/Vk-logo.svg';
-import facebook_logo from './materials/Facebook-logo.svg';
-import instagram_logo from './materials/Instagram-logo.svg';
+
+import rosneft_logo from './materials/Header/rosneft_logo.svg';
+import hexagon2 from './materials/Header/hexagon-gradient-4.svg';
+import hexagon1 from './materials/Header/hexagon-gradient-2.1.svg';
+
+import year_image from './materials/Marathon/Vector.svg';
+import big_hexagon from './materials/Marathon/Hexagon-Vector.svg';
+import little_hexagon from './materials/Marathon/Little-hexagon.svg';
+import three_lines from './materials/Marathon/Three-lines.svg';
+import marathon_back from './materials/Marathon/Marathon-back.svg';
+import vk_logo from './materials/Marathon/Vk-logo.svg';
+import facebook_logo from './materials/Marathon/Facebook-logo.svg';
+import instagram_logo from './materials/Marathon/Instagram-logo.svg';
+
+import date_img from './materials/Annonces/date.svg'
+import award_img from './materials/Annonces/award.svg'
+import place_img from './materials/Annonces/place.svg'
+
 import './App.css';
 
 class Header extends React.Component {
@@ -95,6 +102,120 @@ class Marathon extends React.Component {
     }
 }
 
+class GradientButton extends React.Component {
+    constructor(props) {
+        super(props)
+        this.background = props.background
+        this.finalBackground = props.finalBackground
+        this.text = props.text
+        this.state = {degs: 0}
+        this.intId = 0
+    }
+
+    componentWillUnmount() {
+        if (this.intId !== 0) {
+            clearInterval(this.intId)
+            this.intId = 0
+        }
+    }
+
+    startGradient() {
+        if (this.intId !== 0) {
+            clearInterval(this.intId)
+            this.intId = 0
+        }
+        this.intId = setInterval(() => {
+            if (this.state.degs < 100) {
+                this.setState(state => ({
+                    degs: state.degs + 2
+                }))
+            }
+            else {
+                clearInterval(this.intId)
+                this.intId = 0
+            }
+            console.log(this.state.degs)
+        }, 1)
+    }
+
+    stopGradient() {
+        if (this.intId !== 0) {
+            clearInterval(this.intId)
+            this.intId = 0
+        } 
+        this.intId = setInterval(() => {
+            if (this.state.degs > 0) {
+                this.setState(state => ({
+                    degs: state.degs - 2
+                }))
+            }
+            else {
+                clearInterval(this.intId)
+                this.intId = 0
+            }
+            console.log(this.state.degs)
+        }, 1)
+    }
+    
+    render() {
+        let back;
+        if (this.state.degs !== 0) {
+            back = `linear-gradient(90deg, ${this.finalBackground} ${this.state.degs}%, ${this.background} 100%)`
+        }
+        else {
+            back = 'none'
+        }
+        return(
+            <a className="details" href="#" 
+            style={
+                { background: back}
+            }
+            onMouseOver = {(event) => {
+                console.log('starting gradient')
+                this.startGradient();
+            }}
+            onMouseLeave = {(event) => {
+                this.stopGradient();
+                event.target.style.border = '2px solid rgba(35, 31, 32, 0.2)';
+            }}
+            onClick = {(event) => {
+                event.target.style.border = '2px solid black'
+            }}
+            >{this.text}</a>
+        )
+    }
+}
+
+function Annonce(props) {
+    console.log(require("./materials/Annonces/" + props.logo))
+    return(
+        <div className="annonce-block">
+            <img className="challenge-logo" src={require("./materials/Annonces/" + props.logo).default} alt="logo" />
+            <div className="challenge-description">
+                <p className="challenge-tittle">{props.tittle}</p>
+                <p className="challenge-subtittle">{props.subtittle}</p>
+                <div className="challenge-info">
+                    <div className="challenge-info-images">
+                        <img className="info-item" src={date_img} alt="date" />
+                        <img className="info-item" src={place_img} alt="place" />
+                        <img className="info-item" src={award_img} alt="date" />
+                    </div>
+                    <div className="challenge-info-captures">
+                        <span className="capture-item">{props.date}</span>
+                        <span className="capture-item">{props.place}</span>
+                        <span className="capture-item">{props.award}</span>
+                    </div>
+                </div>
+                <GradientButton 
+                    background='rgba(255, 255, 255, 0)' 
+                    finalBackground='#ffffff'
+                    text='Подробнее'
+                />
+            </div>
+            <img className="challenge-background" src={require("./materials/Annonces/" + props.background).default} alt="background" />
+        </div>
+    )
+}
 
 
 class App extends React.Component {
@@ -102,7 +223,20 @@ class App extends React.Component {
         return (
             <div style={{height: '100%'}}>
                 <Header />
-                <Marathon />
+                <div className="content" style={{verticalAlign: 'top', display: 'flex'}}>
+                    <Marathon />
+                    <div className="annonces-list">
+                        <Annonce 
+                            logo="challenge-logo-1.svg"
+                            tittle="Хакатон трёх городов"
+                            subtittle="Хакатон для молодых аналитиков и разработчиков. Постройте оптимальный путь по сложной поверхности"
+                            date="24–25 сентября"
+                            place="Уфа, Самара и Казань"
+                            award="Призовой фонд — 289 000 ₽"
+                            background="background-1.svg"
+                        />
+                    </div>
+                </div>
             </div>
         )
     }
