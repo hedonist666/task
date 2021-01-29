@@ -19,23 +19,21 @@ import place_img from './materials/Annonces/place.svg'
 
 import './App.css';
 
-class Header extends React.Component {
-    render() {
-        return (
-            <header className="main-header">
-            <div className="links">
-                <img src={rosneft_logo} className="logo-img" alt="logo" />
-                <img src={hexagon1} className="hexagon1" alt="hexagon" />
-                <img src={hexagon2} className="hexagon2" alt="hexagon" />
-                <a className="header-link" href="#" rel="noopener noreferrer">Главная</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">Организаторы</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">Правила</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
-                <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
-            </div>
-            </header>
-        )
-    }
+function Header() {
+    return (
+        <header className="main-header">
+        <div className="links">
+            <img src={rosneft_logo} className="logo-img" alt="logo" />
+            <img src={hexagon1} className="hexagon1" alt="hexagon" />
+            <img src={hexagon2} className="hexagon2" alt="hexagon" />
+            <a className="header-link" href="#" rel="noopener noreferrer">Главная</a>
+            <a className="header-link" href="#" rel="noopener noreferrer">Организаторы</a>
+            <a className="header-link" href="#" rel="noopener noreferrer">Правила</a>
+            <a className="header-link" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
+            <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
+        </div>
+        </header>
+    )
 }
 
 function News(props) {
@@ -54,8 +52,7 @@ function News(props) {
     )
 }
 
-class Marathon extends React.Component {
-    render() {
+function Marathon() {
         return (
             <div className="marathon">
                 <div className="marathon-logo">
@@ -99,7 +96,6 @@ class Marathon extends React.Component {
                 
             </div>
         )
-    }
 }
 
 class GradientButton extends React.Component {
