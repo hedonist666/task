@@ -16,6 +16,12 @@ import instagram_logo from './materials/Marathon/Instagram-logo.svg';
 import date_img from './materials/Annonces/date.svg'
 import award_img from './materials/Annonces/award.svg'
 import place_img from './materials/Annonces/place.svg'
+import hexagon_gradient1 from './materials/Annonces/background-image-1.svg'
+import hexagon_gradient2 from './materials/Annonces/background-image-2.svg'
+
+import print1 from './materials/print-1.svg'
+import print2 from './materials/print-2.svg'
+import print3 from './materials/print-3.svg'
 
 import './App.css';
 
@@ -130,7 +136,6 @@ class GradientButton extends React.Component {
                 clearInterval(this.intId)
                 this.intId = 0
             }
-            console.log(this.state.degs)
         }, 1)
     }
 
@@ -149,7 +154,6 @@ class GradientButton extends React.Component {
                 clearInterval(this.intId)
                 this.intId = 0
             }
-            console.log(this.state.degs)
         }, 1)
     }
     
@@ -167,7 +171,6 @@ class GradientButton extends React.Component {
                 { background: back}
             }
             onMouseOver = {(event) => {
-                console.log('starting gradient')
                 this.startGradient();
             }}
             onMouseLeave = {(event) => {
@@ -183,10 +186,10 @@ class GradientButton extends React.Component {
 }
 
 function Annonce(props) {
-    console.log(require("./materials/Annonces/" + props.logo))
     return(
         <div className="annonce-block">
             <img className="challenge-logo" src={require("./materials/Annonces/" + props.logo).default} alt="logo" />
+            <img className="logo-background" src={require('./materials/Annonces/' + props.logoBackground).default} alt="hexagon" />
             <div className="challenge-description">
                 <p className="challenge-tittle">{props.tittle}</p>
                 <p className="challenge-subtittle">{props.subtittle}</p>
@@ -214,28 +217,63 @@ function Annonce(props) {
 }
 
 
-class App extends React.Component {
-    render() {
-        return (
-            <div style={{height: '100%'}}>
-                <Header />
-                <div className="content" style={{verticalAlign: 'top', display: 'flex'}}>
-                    <Marathon />
-                    <div className="annonces-list">
-                        <Annonce 
-                            logo="challenge-logo-1.svg"
-                            tittle="Хакатон трёх городов"
-                            subtittle="Хакатон для молодых аналитиков и разработчиков. Постройте оптимальный путь по сложной поверхности"
-                            date="24–25 сентября"
-                            place="Уфа, Самара и Казань"
-                            award="Призовой фонд — 289 000 ₽"
-                            background="background-1.svg"
-                        />
-                    </div>
+function App() {
+
+    let annoncesInfo = [
+        {
+            tittle: 'Хакатон трёх городов',
+            subtittle: 'Хакатон для молодых аналитиков и разработчиков. Постройте оптимальный путь по сложной поверхности',
+            date: '24–25 сентября',
+            place: 'Уфа, Самара и Казань',
+            award: 'Призовой фонд — 289 000 ₽'
+        },
+
+        {
+            tittle: 'Хакатон по робототехнике',
+            subtittle: 'Хакатон для программистов-робототехников. Разработайте роботизированное решение для выполнения производственной операции',
+            date: '16–17 октября',
+            place: 'Уфа',
+            award: 'Призовой фонд — 139 000 ₽'
+        },
+
+        {
+            tittle: 'Rosneft Proppant Check Challenge',
+            subtittle: 'Международные IT-соревнования в области ML. Определите размер зёрен пропанта по фотографии',
+            date: 'Сентябрь–ноябрь, финал — 28 ноября',
+            place: 'Москва', 
+            award: 'Призовой фонд — 1 142 000 ₽'
+        }
+    ]
+
+    let annoncesList = Array.from(Array(annoncesInfo.length).keys()).map(i => 
+            <Annonce
+                key={i}
+                logo={`challenge-logo-${i + 1}.svg`}
+                logoBackground={`hexagon-gradient-${i + 1}.svg`}
+                tittle={annoncesInfo[i].tittle}
+                subtittle={annoncesInfo[i].subtittle}
+                date={annoncesInfo[i].date}
+                place={annoncesInfo[i].place}
+                award={annoncesInfo[i].award}
+                background={`background-${i + 1}.svg`}
+            />
+    )
+    return (
+        <div style={{height: '100%', position: 'relative'}}>
+            <Header />
+            <img className="print-1" src={print1} alt="vector" />
+            <img className="print-2" src={print2} alt="vector" />
+            <img className="print-3" src={print3} alt="vector" />
+            <div className="content" style={{verticalAlign: 'top', display: 'flex'}}>
+                <Marathon />
+                <div className="annonces-list">
+                    <img className="hexagon-gradient-1" src={hexagon_gradient1} alt="" />
+                    <img className="hexagon-gradient-2" src={hexagon_gradient2} alt="" />
+                    { annoncesList }
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default App

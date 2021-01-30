@@ -27,7 +27,26 @@
   letter-spacing: 0.02em;
   color: #231F20;
   padding-left: 24px;
+  z-index: 2;
+
+  position: relative;
+  display: inline-block;
 }
+
+.header-link:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px #231F20;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+    transform-origin:0 50%
+}
+
+.header-link:hover:after { 
+    transform: scaleX(1);
+    transform-origin:0 50%;
+}
+
 
 .logo-img {
     width: 130px;
@@ -42,6 +61,7 @@
     width: 432px;
     left: 220px;
     top: -120px;
+    z-index: 1;
 }
 
 .hexagon2 { 
@@ -50,6 +70,7 @@
     width: 500px;
     left: 724px;
     top: -36px;
+    z-index: 1;
 }
 
 .marathon {
@@ -230,6 +251,10 @@
     color: rgba(35, 31, 32, 0.5);
 }
 
+.read-further:hover {
+    color: #231F20;
+}
+
 .to-all-news {
     width: 280px;
     border: 2px solid rgba(35, 31, 32, 0.2);
@@ -315,15 +340,26 @@
     flex-wrap: nowrap;
     display: flex;
     flex-direction: row;
+    z-index: 1;
+}
+
+.logo-background {
+    position: absolute;
+    height: 288px;
+    width: 288px;
+    left: -32px;    
+    top: -20px;
+    z-index: 2;
 }
 
 .challenge-logo {
     margin-top: 32px;
     margin-left: 40px;
     margin-right: 37px;
-    width: 70px;
-    height: 60px;
+    width: 96px;
+    height: 96px;
     position: relative;
+    z-index: 3;
 }
 
 .challenge-description {
@@ -331,7 +367,7 @@
     flex-direction: column;
     margin-top: 26px;
     width: 272px;
-
+    z-index: 2;
 }
 
 .challenge-tittle {
@@ -418,3 +454,37 @@
     padding: 1px;
 }
 
+.hexagon-gradient-1 {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: 480px;
+}
+
+.hexagon-gradient-2 {
+    position: absolute;
+    z-index: 0;
+    bottom: 120px;
+    right: 0;
+}
+
+.print-1 {
+    position: absolute;
+    top: 94px;
+    left: calc(90vw - 280px - 40px);
+    z-index: 3;
+}    
+
+.print-2 {
+    position: absolute;
+    top: 1280px;
+    left: 337px;
+    z-index: 3;
+}    
+
+.print-3 {
+    position: absolute;
+    bottom: 14px;
+    left: calc(99vw - 280px - 40px);
+    z-index: 2;
+}    
