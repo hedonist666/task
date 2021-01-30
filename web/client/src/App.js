@@ -3,6 +3,9 @@ import React from 'react';
 import rosneft_logo from './materials/Header/rosneft_logo.svg';
 import hexagon2 from './materials/Header/hexagon-gradient-4.svg';
 import hexagon1 from './materials/Header/hexagon-gradient-2.1.svg';
+import menu from './materials/Header/menu.svg'
+import close from './materials/Header/close.svg'
+import lang from './materials/Header/lang.svg'
 
 import year_image from './materials/Marathon/Vector.svg';
 import big_hexagon from './materials/Marathon/Hexagon-Vector.svg';
@@ -25,27 +28,62 @@ import print3 from './materials/print-3.svg'
 
 import './App.css';
 
-function Header() {
-    return (
-        <div>
-        <header className="main-header">
-        <div className="links">
-            <img src={rosneft_logo} className="logo-img" alt="logo" />
-            <img src={hexagon1} className="hexagon1" alt="hexagon" />
-            <img src={hexagon2} className="hexagon2" alt="hexagon" />
-            <a className="header-link" href="#" rel="noopener noreferrer">Главная</a>
-            <a className="header-link" href="#" rel="noopener noreferrer">Организаторы</a>
-            <a className="header-link" href="#" rel="noopener noreferrer">Правила</a>
-            <a className="header-link" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
-            <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
-        </div>
-        </header>
-        <div style={{
-            width: '100%',
-            height: '80px'
-        }}></div>
-        </div>
-    )
+class Header extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {menu: true}
+    }
+
+    render() {
+        return (
+            <div>
+            <header className="main-header">
+            <div className="links">
+                <img src={rosneft_logo} className="logo-img" alt="logo" />
+                <img src={hexagon1} className="hexagon1" alt="hexagon" />
+                <img src={hexagon2} className="hexagon2" alt="hexagon" />
+                <a className="header-link" href="#" rel="noopener noreferrer">Главная</a>
+                <a className="header-link" href="#" rel="noopener noreferrer">Организаторы</a>
+                <a className="header-link" href="#" rel="noopener noreferrer">Правила</a>
+                <a className="header-link" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
+                <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
+                <div 
+                    className="burger-menu"
+                    onClick={(event) => {
+                        if (this.state.menu) document.getElementById('mobile-menu').style.display = 'flex'
+                        else document.getElementById('mobile-menu').style.display = 'none'
+                        this.setState(state => ({menu: !state.menu}))
+                    }} 
+                >
+                    <img src={this.state.menu && menu || close} alt="menu" />  
+                </div>
+            </div>
+            </header>
+            <div style={{
+                width: '100%',
+                height: '80px'
+            }}></div>
+            <div id="mobile-menu">
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Главная</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Организаторы</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Правила</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer" style={{marginBottom: '48px'}}>rn.digital</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Рейтинг</a>
+            <a href="#" className="lang"><img src={lang} alt="language" style={{marginRight: '5px'}} />ENG</a>
+                <div className="contacts">
+                    <p>По всем вопросам: </p>
+                    <a className="mail-link" href="#">rd.knpk@bnipi.rosneft.ru</a>
+                </div>
+                <div className="social-media">
+                    <a className="social-link" href="#"><img className="social-logo" src={vk_logo} alt="vk" /></a>
+                    <a className="social-link" href="#"><img className="social-logo" src={facebook_logo} alt="facebook" /></a>
+                    <a className="social-link" href="#"><img className="social-logo" src={instagram_logo} alt="instagram" /></a>
+                </div>
+            </div>
+            </div>
+        )
+    }
 }
 
 function News(props) {
@@ -139,6 +177,7 @@ class GradientButton extends React.Component {
             this.intId = 0
         }
         this.intId = setInterval(() => {
+            //console.log("start gradient: ", this.state)
             if (this.state.degs < 100) {
                 this.setState(state => ({
                     degs: state.degs + 2
@@ -157,6 +196,7 @@ class GradientButton extends React.Component {
             this.intId = 0
         } 
         this.intId = setInterval(() => {
+            //console.log("stop gradient: ", this.state)
             if (this.state.degs > 0) {
                 this.setState(state => ({
                     degs: state.degs - 2
@@ -190,6 +230,7 @@ class GradientButton extends React.Component {
                 event.target.style.border = '2px solid rgba(35, 31, 32, 0.2)';
             }}
             onClick = {(event) => {
+                event.preventDefault()
                 event.target.style.border = '2px solid black'
             }}
             >{this.text}</a>
@@ -201,6 +242,8 @@ class GradientButton extends React.Component {
 function Annonce(props) {
     return(
         <div className="annonce-block">
+            <img className="challenge-background" src={require("./materials/Annonces/" + props.background).default} alt="background" />
+            <div className="break"></div>
             <img className="challenge-logo" src={require("./materials/Annonces/" + props.logo).default} alt="logo" />
             <img className="logo-background" src={require('./materials/Annonces/' + props.logoBackground).default} alt="hexagon" />
             <div className="challenge-description">
@@ -239,7 +282,6 @@ function Annonce(props) {
                     text='Подробнее'
                 />
             </div>
-            <img className="challenge-background" src={require("./materials/Annonces/" + props.background).default} alt="background" />
         </div>
     )
 }
