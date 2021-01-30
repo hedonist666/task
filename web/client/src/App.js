@@ -44,14 +44,14 @@ function Header() {
 
 function News(props) {
     return (
-        <div class="news-block">
-            <div class="news-header">
+        <div className="news-block">
+            <div className="news-header">
                 {props.header}
             </div>
-            <div class="news-content">
+            <div className="news-content">
                 {props.content}
             </div>
-            <a class="read-further" href={props.link}>
+            <a className="read-further" href={props.link}>
                 Читать дальше
             </a>
         </div>
@@ -88,7 +88,12 @@ function Marathon() {
                         content="Пока магма остается в камере, углефикация сдвигает меловой мусковит. Вулканическое стекло, скажем, за 100 тысяч лет, сменяет глетчерный приток, причем, вероятно..."
                         link="#"
                     />
-                    <a className="to-all-news" href="#">Ко всем новостям</a>
+                    <GradientButton
+                        className="to-all-news"
+                        background="rgba(255, 255, 255, 0)"
+                        finalBackground="#FFD200"
+                        text="Ко всем новостям"
+                    />
                     <div className="contacts">
                         <p>По всем вопросам: </p>
                         <a className="mail-link" href="#">rd.knpk@bnipi.rosneft.ru</a>
@@ -111,6 +116,7 @@ class GradientButton extends React.Component {
         this.finalBackground = props.finalBackground
         this.text = props.text
         this.state = {degs: 0}
+        this.className = props.className
         this.intId = 0
     }
 
@@ -166,7 +172,7 @@ class GradientButton extends React.Component {
             back = 'none'
         }
         return(
-            <a className="details" href="#" 
+            <a className={this.className} href="#" 
             style={
                 { background: back}
             }
@@ -185,6 +191,36 @@ class GradientButton extends React.Component {
     }
 }
 
+/*
+const fadeIn = keyframes`from { opacity: 0; } to { opacity: 1; }`;
+const FadeIn = ({ 
+    duration = 300,
+    delay = 0,
+    children,
+    ...delegated 
+}) => {
+    return ( 
+        <Wrapper 
+            {...delegated} 
+            style= {{ 
+                ...(delegated.style || {}), 
+                animationDuration: duration + 'ms', 
+                animationDelay: delay + 'ms', 
+            }} 
+        > 
+            {children} 
+        </Wrapper>
+    );
+};
+
+const Wrapper = styled.div`
+    @media (prefers-reduced-motion: no-preference) {
+        animation-name: $ {fadeIn};
+        animation-fill-mode: backwards;
+    } 
+`;
+*/
+
 function Annonce(props) {
     return(
         <div className="annonce-block">
@@ -193,19 +229,34 @@ function Annonce(props) {
             <div className="challenge-description">
                 <p className="challenge-tittle">{props.tittle}</p>
                 <p className="challenge-subtittle">{props.subtittle}</p>
-                <div className="challenge-info">
-                    <div className="challenge-info-images">
-                        <img className="info-item" src={date_img} alt="date" />
-                        <img className="info-item" src={place_img} alt="place" />
-                        <img className="info-item" src={award_img} alt="date" />
-                    </div>
-                    <div className="challenge-info-captures">
-                        <span className="capture-item">{props.date}</span>
-                        <span className="capture-item">{props.place}</span>
-                        <span className="capture-item">{props.award}</span>
-                    </div>
-                </div>
+                <table className="challenge-info">
+                    <tr>
+                        <td>
+                            <img className="info-item" src={date_img} alt="date" />
+                        </td>
+                        <td className="capture-item">
+                            {props.date}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img className="info-item" src={place_img} alt="date" />
+                        </td>
+                        <td className="capture-item">
+                            {props.place}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img className="info-item" src={award_img} alt="date" />
+                        </td>
+                        <td className="capture-item">
+                            {props.award}
+                        </td>
+                    </tr>
+                </table>
                 <GradientButton 
+                    className='details'
                     background='rgba(255, 255, 255, 0)' 
                     finalBackground='#ffffff'
                     text='Подробнее'

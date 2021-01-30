@@ -341,14 +341,28 @@
     display: flex;
     flex-direction: row;
     z-index: 1;
+
+    animation-name: FadeIn;
+    animation-fill-mode: backwards;
+    animation-duration: 500ms; 
+    animation-delay: 600ms; 
 }
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+} 
 
 .logo-background {
     position: absolute;
     height: 288px;
     width: 288px;
-    left: -32px;    
-    top: -20px;
+    left: -25px;    
+    top: -25px;
     z-index: 2;
 }
 
@@ -394,12 +408,36 @@
 }
 
 .challenge-info {
+    margin-bottom: 85px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.info-item {
+    width: 20px;
+    height: 22px;
+    text-align: center; 
+    vertical-align: middle;
+    padding-right: 15px;
+}
+
+.capture-item {
+    vertical-align: middle;
+    height: 22px;
+}
+
+.items-row {
+    height: 22px;
+    width: 230px;
+}
+
+/*
+.challenge-info {
     display: flex;
     justify-content: top;
     flex-direction: row;
     margin-bottom: 85px;
 }
-
 
 .challenge-info-images {
     display: flex;
@@ -428,6 +466,7 @@
     height: 22px;
     margin-bottom: 18px;
 }
+*/
 
 .challenge-background {
     position: absolute;
