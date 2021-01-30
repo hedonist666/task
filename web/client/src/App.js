@@ -27,6 +27,7 @@ import './App.css';
 
 function Header() {
     return (
+        <div>
         <header className="main-header">
         <div className="links">
             <img src={rosneft_logo} className="logo-img" alt="logo" />
@@ -39,6 +40,11 @@ function Header() {
             <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
         </div>
         </header>
+        <div style={{
+            width: '100%',
+            height: '80px'
+        }}></div>
+        </div>
     )
 }
 
