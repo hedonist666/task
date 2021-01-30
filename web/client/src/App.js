@@ -292,7 +292,7 @@ function App() {
             <img className="print-1" src={print1} alt="vector" />
             <img className="print-2" src={print2} alt="vector" />
             <img className="print-3" src={print3} alt="vector" />
-            <div className="content" style={{verticalAlign: 'top', display: 'flex'}}>
+            <div className="content" style={{verticalAlign: 'top', display: 'flex', height: '100%'}}>
                 <Marathon />
                 <div className="annonces-list">
                     <img className="hexagon-gradient-1" src={hexagon_gradient1} alt="" />
