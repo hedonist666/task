@@ -56,7 +56,7 @@ class Header extends React.Component {
                         }
                         else {
                             document.getElementById('mobile-menu').style.display = 'none'
-                            document.querySelector('.main-header').style.borderBottom = 'border-bottom: 1px solid #d3d2d2'
+                            document.querySelector('.main-header').style.borderBottom = '1px solid #d3d2d2'
                         }
                         this.setState(state => ({menu: !state.menu}))
                     }} 
@@ -251,6 +251,44 @@ class GradientButton extends React.Component {
     }
 }
 
+class WidthHandler extends React.Component {
+    constructor(props) {
+        super(props)
+        this.text = props.text
+        this.state = {first: props.text, second: ''}
+    }
+    update() {
+        if (document.querySelector('.challenge-info').getBoundingClientRect().width <= 220) {
+            this.setState(() => {
+                let i = /[0-9]/.exec(this.text).index
+                return {
+                    first: this.text.slice(0, i),
+                    second: this.text.slice(i)
+                }
+            })
+        } 
+        else {
+            this.setState(() => ({
+                first: this.text,
+                second: ''
+            }))
+        }
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.update.bind(this));
+        this.update()
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.update.bind(this));
+    }
+    render() {
+        return(
+            <div>
+                {this.state.first} <br /> {this.state.second}
+            </div>
+        ) 
+    }
+}
 
 function Annonce(props) {
     return(
@@ -284,7 +322,9 @@ function Annonce(props) {
                             <img className="info-item" src={award_img} alt="date" />
                         </td>
                         <td className="capture-item">
-                            {props.award}
+                            <WidthHandler
+                                text={props.award}
+                            />
                         </td>
                     </tr>
                 </table>

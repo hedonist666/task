@@ -544,94 +544,11 @@
     display: none;
 }
 
-@media screen and (max-width: 768px) {
-    .main-header {
-        height: 48px;
-    }
-    .header-link {
-        display: none;
-    }
-    .logo-img {
-        left: -10px;
-        height: 50%;
-    }
-    #root {
-        overflow: hidden;
-    }
-    .content { 
-        flex-direction: column;
-        width: 100%;
-    }
-    .marathon {
-        width: 100%;
-    }
-    .marathon-back {
-        left: 0;
-    }
-    .hexagon1 {
-        left: 90px;
-        width: 280px;
-        height: 280px;
-        top: -70px;
-    }
-    .print-1 {
-        display: none;
-    }
-    .news { 
-        display: none;
-    }
-    .annonce-block {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    .annonces-list {
-        margin: 0;
-        width: 100%;
-    }
-    .hexagon-gradient-1 {
-        display: none;
-    }
-    .challenge-background {
-        position: relative;
-        margin-left: 16px;
-        margin-right: 16px;
-        margin-top: 30px;
-        width: calc(99vw - 32px);
-        height: 260px;
-    }
-    .break {
-        display: block;
-        flex-basis: 100%;
-    }
-    .logo-background {
-        top: 285px;
-        height: 192px;
-        width: 192px;
-        left: -25px;
-    }
-    .challenge-logo {
-        width: 64px;
-        height: 64px;        
-        margin-left: 16px;
-    }
-    .challenge-description {
-        width: 220px;
-        margin-right: 16px;
-    }
-    
-    .details {
-        position: absolute;
-        left: 16px;
-        margin: 0;
-        bottom: 32px;
-        width: calc(99vw - 32px);
-    }
-    .hexagon2 { 
-        display: none;
-    }
-    .print-2 {
-        display: none;
-    }
+#mobile-menu {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
     .burger-menu {
         display: inline;
         margin-right: 15px;
@@ -649,6 +566,11 @@
         width: 100%;
         background: white;
         z-index: 20;
+
+        animation-name: FadeIn;
+        animation-fill-mode: backwards;
+        animation-duration: 500ms; 
+        animation-delay: 200ms; 
     }
     .header-link-mobile {
         text-decoration: none;
@@ -693,5 +615,111 @@
         width: 288px;
         height: 288px;
         z-index: -1;
+    }
+    .header-link {
+        display: none;
+    }
+    .challenge-background {
+        position: relative;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 30px;
+        width: calc(99vw - 32px);
+        height: 260px;
+    }
+    .break {
+        display: block;
+        flex-basis: 100%;
+    }
+    .logo-background {
+        top: 285px;
+        height: 192px;
+        width: 192px;
+        left: -25px;
+    }
+    .challenge-logo {
+        width: 64px;
+        height: 64px;        
+        margin-left: 16px;
+    }
+    .challenge-description {
+        width: 220px;
+        margin-right: 16px;
+    }
+    
+    .hexagon2 { 
+        display: none;
+    }
+    .print-2 {
+        display: none;
+    }
+    .annonce-block {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .hexagon-gradient-1 {
+        display: none;
+    }
+    .annonces-list {
+        width: calc(99vw - 360px - 80px);
+    }
+    .details {
+        position: absolute;
+        left: 5%;
+        margin: 0;
+        bottom: 32px;
+        width: calc(90% - 4px);
+    }
+    .challenge-description {
+        margin-right: 0;
+    }
+    .annonce-block {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-header {
+        height: 48px;
+    }
+    .logo-img {
+        left: -10px;
+        height: 50%;
+    }
+    #root {
+        overflow: hidden;
+    }
+    .content { 
+        flex-direction: column;
+        width: 100%;
+    }
+    .marathon {
+        width: 100%;
+    }
+    .marathon-back {
+        left: 0;
+    }
+    .hexagon1 {
+        left: 90px;
+        width: 280px;
+        height: 280px;
+        top: -70px;
+    }
+    .print-1 {
+        display: none;
+    }
+    .news { 
+        display: none;
+    }
+    .annonces-list {
+        margin: 0;
+        width: 100%;
+    }
+    .details {
+        position: absolute;
+        left: 16px;
+        margin: 0;
+        bottom: 32px;
+        width: calc(99vw - 32px);
     }
 }
