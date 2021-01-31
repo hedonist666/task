@@ -19,11 +19,6 @@ app.use(morgan('combined'))
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    console.log('TODO')
-})
-
-
 let buffs = []
 let indexes = []
 fs.readdirSync(path.join(__dirname, 'answers')).forEach(file => {
@@ -55,8 +50,13 @@ router.post('/upload', upload.single('payload'), (req, res, next) => {
     }
 })
 
+app.use(express.static(path.join(__dirname, 'client/build')))
+
+router.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname+'/client/build/index.html'));
+})
+
 app.use('/', router)
 
-app.use(express.static(path.join(__dirname, 'client')))
 
 module.exports = app

@@ -14,3 +14,4 @@ web/csv/*
 package-lock.json
 zips
 .eslintcache
+client/build

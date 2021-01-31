@@ -9,4 +9,4 @@ fi
 [ -d web/client/node_modules ] || npm install 
 
 [ -f Build/Makefile ] || node-gyp configure
-node-gyp build && npm test && echo [*] ALL TESTS PASSED && npm start 
+node-gyp build && npm test && echo [*] ALL TESTS PASSED && cd web/client && npm run build && cd .. && npm start 

@@ -5,7 +5,8 @@
   "main": "host.js ",
   "scripts": {
     "start": "DEBUG=* NODE_ENV=test ./bin/www",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
