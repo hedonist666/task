@@ -4,7 +4,7 @@
   "description": "test task",
   "main": "host.js ",
   "scripts": {
-    "start": "DEBUG=* NODE_ENV=test node /bin/www",
+    "start": "DEBUG=* node ./bin/www",
     "test": "NODE_ENV=test mocha",
     "heroku-postbuild": "cd web/client && npm install --only=dev && npm install && npm run build"
   },
