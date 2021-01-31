@@ -444,16 +444,6 @@ export default function App() {
     return(
         <Router>
           <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/app" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Frontend task</Link>
-                </li>
-                <li>
-                  <Link to="/test" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Metrics test</Link>
-                </li>
-              </ul>
-            </nav>
             <Switch>
               <Route path="/test">
                 <Test />
@@ -461,6 +451,18 @@ export default function App() {
               <Route path="/app">
                 <MainPage />
               </Route>
+              <Route path="/">
+                <nav>
+                  <ul>
+                    <li>
+                      <Link to="/app" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Frontend task</Link>
+                    </li>
+                    <li>
+                      <Link to="/test" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Metrics test</Link>
+                    </li>
+                  </ul>
+                </nav>
+              </Route> 
             </Switch>
           </div>
         </Router>
