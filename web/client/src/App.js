@@ -4,7 +4,7 @@ import {
       Switch,
       Route,
       Link
-} from "react-router-dom";
+} from 'react-router-dom';
 import axios from 'axios';
 
 import rosneft_logo from './materials/Header/rosneft_logo.svg';
@@ -44,20 +44,20 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-            <header className="main-header" style={{
+            <header className='main-header' style={{
                 border: (this.state.menu ?  '1px solid #d3d2d2' : 'none')
             }}>
-            <div className="links">
-                <img src={rosneft_logo} className="logo-img" alt="logo" />
-                <img src={hexagon1} className="hexagon1" alt="hexagon" />
-                <img src={hexagon2} className="hexagon2" alt="hexagon" />
-                <a className="header-link" href="#" rel="noopener noreferrer">Главная</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">Организаторы</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">Правила</a>
-                <a className="header-link" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
-                <a className="header-link" href="#" rel="noopener noreferrer" style={{paddingRight: '40px'}}>rn.digital</a>
+            <div className='links'>
+                <img src={rosneft_logo} className='logo-img' alt='logo' />
+                <img src={hexagon1} className='hexagon1' alt='hexagon' />
+                <img src={hexagon2} className='hexagon2' alt='hexagon' />
+                <a className='header-link' href='#' rel='noopener noreferrer'>Главная</a>
+                <a className='header-link' href='#' rel='noopener noreferrer'>Организаторы</a>
+                <a className='header-link' href='#' rel='noopener noreferrer'>Правила</a>
+                <a className='header-link' href='#' rel='noopener noreferrer'>#ПульсМарафон</a>
+                <a className='header-link' href='#' rel='noopener noreferrer' style={{paddingRight: '40px'}}>rn.digital</a>
                 <div 
-                    className="burger-menu"
+                    className='burger-menu'
                     onClick={(event) => {
                         /*
                         if (this.state.menu) {
@@ -72,7 +72,7 @@ class Header extends React.Component {
                         this.setState(state => ({menu: !state.menu}))
                     }} 
                 >
-                    <img src={this.state.menu && menu || close} alt="menu" />  
+                    <img src={this.state.menu && menu || close} alt='menu' />  
                 </div>
             </div>
             </header>
@@ -80,32 +80,32 @@ class Header extends React.Component {
                 width: '100%',
                 height: '80px'
             }}></div>
-            <div id="mobile-menu" style={{
+            <div id='mobile-menu' style={{
                 display: (this.state.menu? 'none' : 'flex') 
             }}>
-                <img className="little-hexagon-menu" src={little_hexagon} alt="hexagon" />
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Главная</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Организаторы</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Правила</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer" style={{
+                <img className='little-hexagon-menu' src={little_hexagon} alt='hexagon' />
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer'>Главная</a>
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer'>Организаторы</a>
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer'>Правила</a>
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer'>#ПульсМарафон</a>
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer' style={{
                     marginTop: '0',
                     marginBottom: '23px',
                     padding: '24px',
                     borderBottom: '1px solid rgba(35, 31, 32, 0.2)'
                 }}>rn.digital</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer">Рейтинг</a>
-            <a href="#" className="lang"><img src={lang} alt="language" style={{marginRight: '5px'}} />ENG</a>
-                <div className="contacts">
+                <a className='header-link-mobile' href='#' rel='noopener noreferrer'>Рейтинг</a>
+            <a href='#' className='lang'><img src={lang} alt='language' style={{marginRight: '5px'}} />ENG</a>
+                <div className='contacts'>
                     <p>По всем вопросам: </p>
-                    <a className="mail-link" href="#">rd.knpk@bnipi.rosneft.ru</a>
+                    <a className='mail-link' href='#'>rd.knpk@bnipi.rosneft.ru</a>
                 </div>
-                <div className="social-media">
-                    <a className="social-link" href="#"><img className="social-logo" src={vk_logo} alt="vk" /></a>
-                    <a className="social-link" href="#"><img className="social-logo" src={facebook_logo} alt="facebook" /></a>
-                    <a className="social-link" href="#"><img className="social-logo" src={instagram_logo} alt="instagram" /></a>
+                <div className='social-media'>
+                    <a className='social-link' href='#'><img className='social-logo' src={vk_logo} alt='vk' /></a>
+                    <a className='social-link' href='#'><img className='social-logo' src={facebook_logo} alt='facebook' /></a>
+                    <a className='social-link' href='#'><img className='social-logo' src={instagram_logo} alt='instagram' /></a>
                 </div>
-                <img className="marathon-back-menu" src={marathon_back} alt="hexagon" />
+                <img className='marathon-back-menu' src={marathon_back} alt='hexagon' />
             </div>
             </div>
         )
@@ -114,14 +114,14 @@ class Header extends React.Component {
 
 function News(props) {
     return (
-        <div className="news-block">
-            <div className="news-header">
+        <div className='news-block'>
+            <div className='news-header'>
                 {props.header}
             </div>
-            <div className="news-content">
+            <div className='news-content'>
                 {props.content}
             </div>
-            <a className="read-further" href={props.link}>
+            <a className='read-further' href={props.link}>
                 Читать дальше
             </a>
         </div>
@@ -130,48 +130,48 @@ function News(props) {
 
 function Marathon() {
         return (
-            <div className="marathon">
-                <div className="marathon-logo">
-                    <div className="main-txt">
+            <div className='marathon'>
+                <div className='marathon-logo'>
+                    <div className='main-txt'>
                         Марафон <br /> ИТ-соревнований
                     </div>
-                    <img className="year-img" src={year_image} alt="2020" />
-                    <img className="big-hexagon" src={big_hexagon} alt="hexagon" />
-                    <img className="three-lines" src={three_lines} alt="3 lines" />
-                    <img className="little-hexagon" src={little_hexagon} alt="hexagon" />
-                    <div className="sub-txt">
+                    <img className='year-img' src={year_image} alt='2020' />
+                    <img className='big-hexagon' src={big_hexagon} alt='hexagon' />
+                    <img className='three-lines' src={three_lines} alt='3 lines' />
+                    <img className='little-hexagon' src={little_hexagon} alt='hexagon' />
+                    <div className='sub-txt'>
                         Роснефть приглашает разработчиков и аналитиков принять участие в одном из трёх соревнований
                     </div>
                 </div>
-                <img className="marathon-back" src={marathon_back} alt="hexagon" />
-                <div className="news">
-                    <div className="news-main-header">
+                <img className='marathon-back' src={marathon_back} alt='hexagon' />
+                <div className='news'>
+                    <div className='news-main-header'>
                         #ПульсМарафон
                     </div>
                     <News 
-                        header="Отложение высвобождает пегматитовый сталагмит"
-                        content="Базис эрозии, основываясь большей частью на сейсмических данных, глобален. Эоловое засоление ослабляет комплекс.  Лагуна, так же, как и в других..."
-                        link="#"
+                        header='Отложение высвобождает пегматитовый сталагмит'
+                        content='Базис эрозии, основываясь большей частью на сейсмических данных, глобален. Эоловое засоление ослабляет комплекс.  Лагуна, так же, как и в других...'
+                        link='#'
                     />
                     <News 
-                        header="Плато смещает аллит, что, однако, не уничтожило доледниковую"
-                        content="Пока магма остается в камере, углефикация сдвигает меловой мусковит. Вулканическое стекло, скажем, за 100 тысяч лет, сменяет глетчерный приток, причем, вероятно..."
-                        link="#"
+                        header='Плато смещает аллит, что, однако, не уничтожило доледниковую'
+                        content='Пока магма остается в камере, углефикация сдвигает меловой мусковит. Вулканическое стекло, скажем, за 100 тысяч лет, сменяет глетчерный приток, причем, вероятно...'
+                        link='#'
                     />
                     <GradientButton
-                        className="to-all-news"
-                        background="rgba(255, 255, 255, 0)"
-                        finalBackground="#FFD200"
-                        text="Ко всем новостям"
+                        className='to-all-news'
+                        background='rgba(255, 255, 255, 0)'
+                        finalBackground='#FFD200'
+                        text='Ко всем новостям'
                     />
-                    <div className="contacts">
+                    <div className='contacts'>
                         <p>По всем вопросам: </p>
-                        <a className="mail-link" href="#">rd.knpk@bnipi.rosneft.ru</a>
+                        <a className='mail-link' href='#'>rd.knpk@bnipi.rosneft.ru</a>
                     </div>
-                    <div className="social-media">
-                        <a className="social-link" href="#"><img className="social-logo" src={vk_logo} alt="vk" /></a>
-                        <a className="social-link" href="#"><img className="social-logo" src={facebook_logo} alt="facebook" /></a>
-                        <a className="social-link" href="#"><img className="social-logo" src={instagram_logo} alt="instagram" /></a>
+                    <div className='social-media'>
+                        <a className='social-link' href='#'><img className='social-logo' src={vk_logo} alt='vk' /></a>
+                        <a className='social-link' href='#'><img className='social-logo' src={facebook_logo} alt='facebook' /></a>
+                        <a className='social-link' href='#'><img className='social-logo' src={instagram_logo} alt='instagram' /></a>
                     </div>
                 </div>
                 
@@ -203,7 +203,7 @@ class GradientButton extends React.Component {
             this.intId = 0
         }
         this.intId = setInterval(() => {
-            //console.log("start gradient: ", this.state)
+            //console.log('start gradient: ', this.state)
             if (this.state.degs < 100) {
                 this.setState(state => ({
                     degs: state.degs + 2
@@ -222,7 +222,7 @@ class GradientButton extends React.Component {
             this.intId = 0
         } 
         this.intId = setInterval(() => {
-            //console.log("stop gradient: ", this.state)
+            //console.log('stop gradient: ', this.state)
             if (this.state.degs > 0) {
                 this.setState(state => ({
                     degs: state.degs - 2
@@ -244,7 +244,7 @@ class GradientButton extends React.Component {
             back = 'none'
         }
         return(
-            <a className={this.className} href="#" 
+            <a className={this.className} href='#' 
             style={
                 { background: back}
             }
@@ -300,36 +300,36 @@ class Annonce extends React.Component {
 
     render() {
         return (
-            <div className="annonce-block">
-                <img className="challenge-background" src={require("./materials/Annonces/" + this.background).default} alt="background" />
-                <div className="break"></div>
-                <img className="challenge-logo" src={require("./materials/Annonces/" + this.logo).default} alt="logo" />
-                <img className="logo-background" src={require('./materials/Annonces/' + this.logoBackground).default} alt="hexagon" />
-                <div className="challenge-description">
-                    <p className="challenge-tittle">{this.tittle}</p>
-                    <p className="challenge-subtittle">{this.subtittle}</p>
-                    <table className="challenge-info" ref={this.refAnnonce}>
+            <div className='annonce-block'>
+                <img className='challenge-background' src={require('./materials/Annonces/' + this.background).default} alt='background' />
+                <div className='break'></div>
+                <img className='challenge-logo' src={require('./materials/Annonces/' + this.logo).default} alt='logo' />
+                <img className='logo-background' src={require('./materials/Annonces/' + this.logoBackground).default} alt='hexagon' />
+                <div className='challenge-description'>
+                    <p className='challenge-tittle'>{this.tittle}</p>
+                    <p className='challenge-subtittle'>{this.subtittle}</p>
+                    <table className='challenge-info' ref={this.refAnnonce}>
                         <tr>
                             <td>
-                                <img className="info-item" src={date_img} alt="date" />
+                                <img className='info-item' src={date_img} alt='date' />
                             </td>
-                            <td className="capture-item">
+                            <td className='capture-item'>
                                 {this.date}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img className="info-item" src={place_img} alt="date" />
+                                <img className='info-item' src={place_img} alt='date' />
                             </td>
-                            <td className="capture-item">
+                            <td className='capture-item'>
                                 {this.place}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img className="info-item" src={award_img} alt="date" />
+                                <img className='info-item' src={award_img} alt='date' />
                             </td>
-                            <td className="capture-item">
+                            <td className='capture-item'>
                                 <div>
                                     {this.state.first} <br /> {this.state.second}
                                 </div>
@@ -393,14 +393,14 @@ function MainPage() {
     return (
         <div style={{height: '100%', position: 'relative'}}>
             <Header />
-            <img className="print-1" src={print1} alt="vector" />
-            <img className="print-2" src={print2} alt="vector" />
-            <img className="print-3" src={print3} alt="vector" />
-            <div className="content" style={{verticalAlign: 'top', display: 'flex', height: '100%'}}>
+            <img className='print-1' src={print1} alt='vector' />
+            <img className='print-2' src={print2} alt='vector' />
+            <img className='print-3' src={print3} alt='vector' />
+            <div className='content' style={{verticalAlign: 'top', display: 'flex', height: '100%'}}>
                 <Marathon />
-                <div className="annonces-list">
-                    <img className="hexagon-gradient-1" src={hexagon_gradient1} alt="" />
-                    <img className="hexagon-gradient-2" src={hexagon_gradient2} alt="" />
+                <div className='annonces-list'>
+                    <img className='hexagon-gradient-1' src={hexagon_gradient1} alt='' />
+                    <img className='hexagon-gradient-2' src={hexagon_gradient2} alt='' />
                     { annoncesList }
                 </div>
             </div>
@@ -430,13 +430,13 @@ function Test() {
             flexDirection: 'column',
             alignItems: 'center',
         }}>
-        <form enctype="multipart/form-data" onSubmit={onSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+        <form enctype='multipart/form-data' onSubmit={onSubmit} style={{display: 'flex', flexDirection: 'column'}}>
             <p style={{marginBottom: '20px'}}>Прикрептие файл для получения результатов метрик</p>
             <label style={{marginBottom: '20px'}}>
                 Файл: 
-                    <input type="file" name="payload" />
+                    <input type='file' name='payload' />
             </label>
-            <input type="submit" value="отправить" />
+            <input type='submit' value='отправить' />
         </form>
         </div>
     )
@@ -447,20 +447,20 @@ export default function App() {
         <Router>
           <div>
             <Switch>
-              <Route path="/test">
+              <Route path='/test'>
                 <Test />
               </Route>
-              <Route path="/app">
+              <Route path='/app'>
                 <MainPage />
               </Route>
-              <Route path="/">
+              <Route path='/'>
                 <nav>
                   <ul>
                     <li>
-                      <Link to="/app" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Frontend task</Link>
+                      <Link to='/app' onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Frontend task</Link>
                     </li>
                     <li>
-                      <Link to="/test" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Metrics test</Link>
+                      <Link to='/test' onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Metrics test</Link>
                     </li>
                   </ul>
                 </nav>
