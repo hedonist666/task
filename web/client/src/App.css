@@ -718,9 +718,10 @@
     }
     .details {
         position: absolute;
-        left: 16px;
+        left: 5vw;
         margin: 0;
         bottom: 32px;
-        width: calc(99vw - 32px);
+        width: 90vw;
+        box-sizing: border-box;
     }
 }

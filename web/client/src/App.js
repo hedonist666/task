@@ -44,7 +44,9 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-            <header className="main-header">
+            <header className="main-header" style={{
+                border: (this.state.menu ?  '1px solid #d3d2d2' : 'none')
+            }}>
             <div className="links">
                 <img src={rosneft_logo} className="logo-img" alt="logo" />
                 <img src={hexagon1} className="hexagon1" alt="hexagon" />
@@ -57,6 +59,7 @@ class Header extends React.Component {
                 <div 
                     className="burger-menu"
                     onClick={(event) => {
+                        /*
                         if (this.state.menu) {
                             document.getElementById('mobile-menu').style.display = 'flex'
                             document.querySelector('.main-header').style.border = 'none'
@@ -65,6 +68,7 @@ class Header extends React.Component {
                             document.getElementById('mobile-menu').style.display = 'none'
                             document.querySelector('.main-header').style.borderBottom = '1px solid #d3d2d2'
                         }
+                        */
                         this.setState(state => ({menu: !state.menu}))
                     }} 
                 >
@@ -76,7 +80,9 @@ class Header extends React.Component {
                 width: '100%',
                 height: '80px'
             }}></div>
-            <div id="mobile-menu">
+            <div id="mobile-menu" style={{
+                display: (this.state.menu? 'none' : 'flex') 
+            }}>
                 <img className="little-hexagon-menu" src={little_hexagon} alt="hexagon" />
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Главная</a>
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Организаторы</a>
@@ -252,98 +258,94 @@ class GradientButton extends React.Component {
             onClick = {(event) => {
                 event.preventDefault()
                 event.target.style.border = '2px solid black'
-            }}
-            >{this.text}</a>
+            }}> {this.text} </a>
         )
     }
 }
 
-class WidthHandler extends React.Component {
+
+class Annonce extends React.Component {
     constructor(props) {
         super(props)
-        this.text = props.text
-        this.state = {first: props.text, second: ''}
+        this.text = props.award
+        this.state = {first: props.award, second: ''}
+        this.background = props.background
+        this.logo = props.logo
+        this.logoBackground = props.logoBackground
+        this.tittle = props.tittle
+        this.subtittle = props.subtittle
+        this.date = props.date
+        this.place = props.place
+        this.refAnnonce = React.createRef()
     }
-    update() {
-        if (document.querySelector('.challenge-info').getBoundingClientRect().width <= 220) {
-            this.setState(() => {
+
+    componentDidMount() {
+        let width = this.refAnnonce.current.offsetWidth
+        if (width <= 220) {
+            this.setState(state => {
                 let i = /[0-9]/.exec(this.text).index
                 return {
                     first: this.text.slice(0, i),
-                    second: this.text.slice(i)
+                    second: this.text.slice(i),
                 }
             })
         } 
         else {
-            this.setState(() => ({
+            this.setState(state => ({
                 first: this.text,
-                second: ''
+                second: '',
             }))
         }
     }
-    componentDidMount() {
-        window.addEventListener('resize', this.update.bind(this));
-        this.update()
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.update.bind(this));
-    }
-    render() {
-        return(
-            <div>
-                {this.state.first} <br /> {this.state.second}
-            </div>
-        ) 
-    }
-}
 
-function Annonce(props) {
-    return(
-        <div className="annonce-block">
-            <img className="challenge-background" src={require("./materials/Annonces/" + props.background).default} alt="background" />
-            <div className="break"></div>
-            <img className="challenge-logo" src={require("./materials/Annonces/" + props.logo).default} alt="logo" />
-            <img className="logo-background" src={require('./materials/Annonces/' + props.logoBackground).default} alt="hexagon" />
-            <div className="challenge-description">
-                <p className="challenge-tittle">{props.tittle}</p>
-                <p className="challenge-subtittle">{props.subtittle}</p>
-                <table className="challenge-info">
-                    <tr>
-                        <td>
-                            <img className="info-item" src={date_img} alt="date" />
-                        </td>
-                        <td className="capture-item">
-                            {props.date}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img className="info-item" src={place_img} alt="date" />
-                        </td>
-                        <td className="capture-item">
-                            {props.place}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img className="info-item" src={award_img} alt="date" />
-                        </td>
-                        <td className="capture-item">
-                            <WidthHandler
-                                text={props.award}
-                            />
-                        </td>
-                    </tr>
-                </table>
-                <GradientButton 
-                    className='details'
-                    background='rgba(255, 255, 255, 0)' 
-                    finalBackground='#ffffff'
-                    text='Подробнее'
-                />
+    render() {
+        return (
+            <div className="annonce-block">
+                <img className="challenge-background" src={require("./materials/Annonces/" + this.background).default} alt="background" />
+                <div className="break"></div>
+                <img className="challenge-logo" src={require("./materials/Annonces/" + this.logo).default} alt="logo" />
+                <img className="logo-background" src={require('./materials/Annonces/' + this.logoBackground).default} alt="hexagon" />
+                <div className="challenge-description">
+                    <p className="challenge-tittle">{this.tittle}</p>
+                    <p className="challenge-subtittle">{this.subtittle}</p>
+                    <table className="challenge-info" ref={this.refAnnonce}>
+                        <tr>
+                            <td>
+                                <img className="info-item" src={date_img} alt="date" />
+                            </td>
+                            <td className="capture-item">
+                                {this.date}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img className="info-item" src={place_img} alt="date" />
+                            </td>
+                            <td className="capture-item">
+                                {this.place}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img className="info-item" src={award_img} alt="date" />
+                            </td>
+                            <td className="capture-item">
+                                <div>
+                                    {this.state.first} <br /> {this.state.second}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <GradientButton 
+                        className='details'
+                        background='rgba(255, 255, 255, 0)' 
+                        finalBackground='#ffffff'
+                        text='Подробнее'
+                    />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 
