@@ -31,16 +31,17 @@ fs.readdirSync(path.join(__dirname, 'answers')).forEach(file => {
 
 
 router.post('/upload', upload.single('payload'), (req, res, next) => {
-    req.body.idx = parseInt(req.body.idx)
-    if (req.body.idx > buffs.length || req.body.idx < 0) {
+    let idx = parseInt(req.body.idx)
+    if (idx > buffs.length || idx < 0) {
         return res.status(RESPONSE_STATUS_ERROR).send({error: 'bad index'})
     }
     if (!req.file) {
         return res.status(RESPONSE_STATUS_ERROR).send({error: 'bad file'})
     }
+    console.log('[*] file ok')
     try {
-        let mae = metrics.mae(buffs[req.body.idx], req.file.path, indexes[req.body.idx])
-        let rmape = metrics.rmape(buffs[req.body.idx], req.file.path, indexes[req.body.idx])
+        let mae = metrics.mae(buffs[idx], req.file.path, indexes[idx])
+        let rmape = metrics.rmape(buffs[idx], req.file.path, indexes[idx])
         res.status = RESPONSE_STATUS_SUCCESS
         return res.json({mae: mae, rmape: rmape})
     }

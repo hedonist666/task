@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+      BrowserRouter as Router,
+      Switch,
+      Route,
+      Link
+} from "react-router-dom";
+import axios from 'axios';
 
 import rosneft_logo from './materials/Header/rosneft_logo.svg';
 import hexagon2 from './materials/Header/hexagon-gradient-4.svg';
@@ -340,7 +347,7 @@ function Annonce(props) {
 }
 
 
-function App() {
+function MainPage() {
 
     let annoncesInfo = [
         {
@@ -399,4 +406,63 @@ function App() {
     )
 }
 
-export default App
+function Test() {
+    let onSubmit = (event) => {
+        event.preventDefault()
+        let formData = new FormData()
+        formData.append('payload', event.target[0].files[0])
+        formData.append('idx', 0);
+        axios.post('/upload', formData , {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => {
+            if (res.status === 200) alert(JSON.stringify(res.data))
+            else alert(JSON.stringify(res))
+        }).catch(alert)
+    }
+    return(
+        <div style={{
+            display: 'flex',
+            marginTop: '30vh',
+            flexDirection: 'column',
+            alignItems: 'center',
+        }}>
+        <form enctype="multipart/form-data" onSubmit={onSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+            <p style={{marginBottom: '20px'}}>Прикрептие файл для получения результатов метрик</p>
+            <label style={{marginBottom: '20px'}}>
+                Файл: 
+                    <input type="file" name="payload" />
+            </label>
+            <input type="submit" value="отправить" />
+        </form>
+        </div>
+    )
+}
+
+export default function App() {
+    return(
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/app" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Frontend task</Link>
+                </li>
+                <li>
+                  <Link to="/test" onClick={(event) => {event.target.parentNode.parentNode.style.display = 'none'}}>Metrics test</Link>
+                </li>
+              </ul>
+            </nav>
+            <Switch>
+              <Route path="/test">
+                <Test />
+              </Route>
+              <Route path="/app">
+                <MainPage />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+    )
+}
