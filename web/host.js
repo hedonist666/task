@@ -54,7 +54,7 @@ router.post('/upload', upload.single('payload'), (req, res, next) => {
 app.use(express.static(path.join(__dirname, 'client/build')))
 
 router.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname+'/client/build/index.html'));
+        res.sendFile(path.join(__dirname,'client/build/index.html'));
 })
 
 app.use('/', router)
