@@ -4,9 +4,9 @@
   "description": "test task",
   "main": "host.js ",
   "scripts": {
-    "start": "DEBUG=* NODE_ENV=test ./bin/www",
+    "start": "DEBUG=* NODE_ENV=test node /bin/www",
     "test": "NODE_ENV=test mocha",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd web/client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
