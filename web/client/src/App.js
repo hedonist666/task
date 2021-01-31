@@ -50,8 +50,14 @@ class Header extends React.Component {
                 <div 
                     className="burger-menu"
                     onClick={(event) => {
-                        if (this.state.menu) document.getElementById('mobile-menu').style.display = 'flex'
-                        else document.getElementById('mobile-menu').style.display = 'none'
+                        if (this.state.menu) {
+                            document.getElementById('mobile-menu').style.display = 'flex'
+                            document.querySelector('.main-header').style.border = 'none'
+                        }
+                        else {
+                            document.getElementById('mobile-menu').style.display = 'none'
+                            document.querySelector('.main-header').style.borderBottom = 'border-bottom: 1px solid #d3d2d2'
+                        }
                         this.setState(state => ({menu: !state.menu}))
                     }} 
                 >
@@ -64,11 +70,17 @@ class Header extends React.Component {
                 height: '80px'
             }}></div>
             <div id="mobile-menu">
+                <img className="little-hexagon-menu" src={little_hexagon} alt="hexagon" />
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Главная</a>
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Организаторы</a>
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Правила</a>
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">#ПульсМарафон</a>
-                <a className="header-link-mobile" href="#" rel="noopener noreferrer" style={{marginBottom: '48px'}}>rn.digital</a>
+                <a className="header-link-mobile" href="#" rel="noopener noreferrer" style={{
+                    marginTop: '0',
+                    marginBottom: '23px',
+                    padding: '24px',
+                    borderBottom: '1px solid rgba(35, 31, 32, 0.2)'
+                }}>rn.digital</a>
                 <a className="header-link-mobile" href="#" rel="noopener noreferrer">Рейтинг</a>
             <a href="#" className="lang"><img src={lang} alt="language" style={{marginRight: '5px'}} />ENG</a>
                 <div className="contacts">
@@ -80,6 +92,7 @@ class Header extends React.Component {
                     <a className="social-link" href="#"><img className="social-logo" src={facebook_logo} alt="facebook" /></a>
                     <a className="social-link" href="#"><img className="social-logo" src={instagram_logo} alt="instagram" /></a>
                 </div>
+                <img className="marathon-back-menu" src={marathon_back} alt="hexagon" />
             </div>
             </div>
         )

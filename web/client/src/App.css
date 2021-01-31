@@ -658,7 +658,7 @@
         font-size: 20px;
         line-height: 24px;
         color: #231F20;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
     .header-link-mobile:after {
         display:block;
@@ -679,5 +679,19 @@
         align-items: center;
         font-weight: normal;
         text-decoration: none;
+    }
+    .marathon-back-menu {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        top: 200px;
+    }
+    .little-hexagon-menu {
+        position: absolute; 
+        top: 20px;
+        left: 0;
+        width: 288px;
+        height: 288px;
+        z-index: -1;
     }
 }
